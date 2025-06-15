@@ -88,10 +88,11 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.test)
 
                 implementation(libs.koin.test)
-
                 implementation(libs.ktor.client.mock)
                 implementation(libs.ktor.serialization.kotlinx.json)
                 implementation(libs.ktor.client.content.negotiation)
+
+                implementation("org.slf4j:slf4j-simple:2.0.9")
             }
         }
 

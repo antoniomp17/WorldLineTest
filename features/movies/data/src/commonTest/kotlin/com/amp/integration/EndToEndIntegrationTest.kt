@@ -13,6 +13,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 import org.koin.test.inject
@@ -49,6 +50,7 @@ class EndToEndIntegrationTest: KoinTest {
                     }
                 }
             }
+            single(qualifier = named("tmdb_api_key")) { "test_api_key" }
         }
 
         startKoin {

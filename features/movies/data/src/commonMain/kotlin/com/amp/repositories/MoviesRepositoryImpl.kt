@@ -18,10 +18,11 @@ class MoviesRepositoryImpl(
         return try {
             val response = moviesDataSource.getPopularMovies()
             if (response.isSuccess) {
-                if(response.getOrNull() == null){
-                    return Result.failure(Exception("No data found"))
+                val popularMovies = response.getOrNull()
+                if (popularMovies == null || popularMovies.results.isEmpty()) {
+                    return Result.failure(Exception("No movies found"))
                 }
-                Result.success(response.getOrNull()!!.toDomain())
+                Result.success(popularMovies.toDomain())
             } else {
                 Result.failure(response.exceptionOrNull()!!)
             }
