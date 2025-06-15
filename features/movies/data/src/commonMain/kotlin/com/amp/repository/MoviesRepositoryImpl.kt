@@ -1,4 +1,4 @@
-package com.amp.repositories
+package com.amp.repository
 
 import com.amp.datasources.MoviesDataSource
 import com.amp.mappers.toDomain

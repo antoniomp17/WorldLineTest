@@ -93,6 +93,8 @@ kotlin {
                 implementation(libs.ktor.client.content.negotiation)
 
                 implementation("org.slf4j:slf4j-simple:2.0.9")
+
+                implementation(project(":features:movies:domain"))
             }
         }
 

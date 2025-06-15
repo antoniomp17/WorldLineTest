@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinSerialization)
-    //alias(libs.plugins.mockative)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -30,6 +30,11 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.test)
+
+            implementation(libs.koin.test)
+
+            implementation(libs.mokkery)
+            implementation(libs.mokkery.coroutines)
         }
 
         androidMain.dependencies {}

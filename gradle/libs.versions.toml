@@ -27,7 +27,7 @@ koin = "4.1.0"
 koin-compose = "4.1.0"
 
 #Testing
-mockative = "3.0.1"
+mokkery = "2.8.0"
 turbine = "1.2.1"
 
 # Quality
@@ -79,11 +79,12 @@ koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-compose" }
 
 # Testing
-mockative = { module = "io.mockative:mockative", version.ref = "mockative" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
+mokkery = { module = "dev.mokkery:mokkery-gradle", version.ref = "mokkery" }
+mokkery-coroutines = { module = "dev.mokkery:mokkery-coroutines", version.ref = "mokkery" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -95,8 +96,10 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
-mockative = { id = "io.mockative", version.ref = "mockative" }
 androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 
 # BuildKonfig
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+
+#Mokkery
+mokkery = { id = "dev.mokkery", version.ref = "mokkery" }

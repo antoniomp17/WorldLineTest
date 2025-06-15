@@ -2,6 +2,7 @@ package com.amp.integration
 
 import com.amp.di.dataModule
 import com.amp.di.domainModule
+import com.amp.usecases.GetPopularMoviesUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond

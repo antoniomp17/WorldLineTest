@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.kover) apply false
     alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
     alias(libs.plugins.buildkonfig) apply false
+    alias(libs.plugins.mokkery) apply false
 }
 
 allprojects {

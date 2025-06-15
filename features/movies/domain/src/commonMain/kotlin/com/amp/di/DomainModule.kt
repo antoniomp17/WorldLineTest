@@ -1,7 +1,7 @@
 package com.amp.di
 
-import com.amp.integration.GetMovieDetailsUseCase
-import com.amp.integration.GetPopularMoviesUseCase
+import com.amp.usecases.GetMovieDetailsUseCase
+import com.amp.usecases.GetPopularMoviesUseCase
 import org.koin.dsl.module
 
 val domainModule = module {

@@ -1,9 +1,9 @@
 package com.amp.mappers
 
-import com.amp.models.PopularMoviesResponse
+import com.amp.models.PopularMovieResponse
 import com.amp.entities.list.Movie
 
-fun PopularMoviesResponse.toDomain(): List<Movie> {
+fun PopularMovieResponse.toDomain(): List<Movie> {
     return results.map {
         Movie(
             id = it.id,

@@ -1,15 +1,13 @@
 package com.amp.datasources
 
 import com.amp.data.BuildKonfig
-import com.amp.models.PopularMoviesResponse
+import com.amp.models.PopularMovieResponse
 import com.amp.entities.details.MovieDetails
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
-import io.ktor.http.URLBuilder
-import io.ktor.http.headers
 
 class Api(
     private val httpClient: HttpClient,
@@ -30,7 +28,7 @@ class Api(
     suspend fun getPopularMovies(
         page: Int = 1,
         language: String = "en-US"
-    ): Result<PopularMoviesResponse> {
+    ): Result<PopularMovieResponse> {
         return try {
             Result.success(
                 httpClient.get(POPULAR_MOVIES_ENDPOINT) {
@@ -38,7 +36,7 @@ class Api(
                     header("accept", "application/json")
                     parameter("language", language)
                     parameter("page", page)
-                }.body<PopularMoviesResponse>())
+                }.body<PopularMovieResponse>())
             
         } catch (exception: Exception) {
             Result.failure(
