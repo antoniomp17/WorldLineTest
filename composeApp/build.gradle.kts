@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -35,6 +34,9 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
         }
+        iosMain.dependencies {
+
+        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -48,6 +50,8 @@ kotlin {
             implementation(libs.koin.core)
 
             implementation(project(":features:movies:domain"))
+            implementation(project(":features:movies:data"))
+            implementation(project(":core:network"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -56,11 +60,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.amp.worldlineApp"
+    namespace = "com.amp.worldlineapp"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.amp.worldlineApp"
+        applicationId = "com.amp.worldlineapp"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

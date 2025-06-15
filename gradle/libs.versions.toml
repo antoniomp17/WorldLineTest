@@ -1,7 +1,7 @@
 [versions]
-agp = "8.10.1"
+agp = "8.11.0-rc02"
 android-compileSdk = "36"
-android-minSdk = "24"
+android-minSdk = "30"
 android-targetSdk = "36"
 androidx-activity = "1.10.1"
 androidx-appcompat = "1.7.1"
@@ -34,8 +34,11 @@ turbine = "1.2.1"
 detekt = "1.23.8"
 kover = "0.9.1"
 kotlinStdlib = "2.1.21"
-runner = "1.5.2"
-core = "1.5.0"
+runner = "1.6.2"
+core = "1.6.1"
+
+# BuildKonfig
+buildkonfig = "0.17.1"
 
 
 [libraries]
@@ -82,8 +85,6 @@ kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", versio
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
 
-
-
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -97,10 +98,5 @@ sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 mockative = { id = "io.mockative", version.ref = "mockative" }
 androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 
-[bundles]
-ktor-common = [
-    "ktor-client-core",
-    "ktor-client-content-negotiation",
-    "ktor-serialization-kotlinx-json",
-    "ktor-client-logging"
-]
+# BuildKonfig
+buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }

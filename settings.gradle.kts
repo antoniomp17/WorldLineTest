@@ -24,3 +24,5 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":features:movies:domain")
+include(":features:movies:data")
+include(":core:network")
