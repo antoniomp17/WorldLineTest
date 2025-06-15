@@ -5,11 +5,11 @@ import com.amp.repository.MoviesRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class GetMovieDetailsUseCase: KoinComponent {
+open class GetMovieDetailsUseCase: KoinComponent {
 
     private val moviesRepository: MoviesRepository by inject()
 
-    suspend operator fun invoke(
+    open suspend operator fun invoke(
         movieId: Int,
         language: String = "en-US"
     ): Result<MovieDetails> {
