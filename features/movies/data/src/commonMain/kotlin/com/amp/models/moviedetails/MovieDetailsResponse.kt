@@ -3,6 +3,8 @@ package com.amp.models.moviedetails
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
+
 @Serializable
 data class MovieDetailsResponse(
     @SerialName("id")
@@ -66,7 +68,7 @@ data class MovieDetailsResponse(
     val tagline: String? = null,
     
     @SerialName("belongs_to_collection")
-    val belongsToCollection: String? = null,
+    val belongsToCollection: CollectionData? = null,
     
     @SerialName("genres")
     val genres: List<GenreData> = emptyList(),

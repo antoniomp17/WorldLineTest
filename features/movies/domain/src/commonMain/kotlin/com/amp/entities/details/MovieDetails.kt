@@ -2,6 +2,7 @@ package com.amp.entities.details
 
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 data class MovieDetails(
     val id: Int,
@@ -24,7 +25,7 @@ data class MovieDetails(
     val imdbId: String? = null,
     val status: String = "",
     val tagline: String? = null,
-    val belongsToCollection: String? = null,
+    val belongsToCollection: Collection? = null,
     val genres: List<Genre> = emptyList(),
     val productionCompanies: List<ProductionCompany> = emptyList(),
     val productionCountries: List<ProductionCountry> = emptyList(),
