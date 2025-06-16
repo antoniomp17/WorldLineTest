@@ -25,12 +25,14 @@ fun MoviesListContent(
         MovieGenreUtils.groupMoviesByGenre(state.movies)
     }
 
-    Column(modifier = modifier.fillMaxSize()) {
-        Text(
-            text = "Popular Movies",
-            style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(16.dp)
-        )
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(
+                horizontal = 16.dp,
+                vertical = 64.dp
+            ),
+    ) {
 
         PullToRefreshBox(
             isRefreshing = state.isRefreshing,
