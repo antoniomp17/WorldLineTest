@@ -8,12 +8,6 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
 }
 
-fun <T : Any> propOrDef(propertyName: String, defaultValue: T): T {
-    @Suppress("UNCHECKED_CAST")
-    val propertyValue = project.properties[propertyName] as T?
-    return propertyValue ?: defaultValue
-}
-
 val localProperties = Properties()
 val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
@@ -27,7 +21,7 @@ buildkonfig {
         buildConfigField(
             com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING,
             "API_KEY",
-            "\"" + (localProperties.getProperty("api.key") ?: "") + "\""
+            localProperties.getProperty("api.key") ?: ""
         )
     }
 }

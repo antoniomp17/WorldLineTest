@@ -1,4 +1,4 @@
-package com.amp.models
+package com.amp.models.movielist
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

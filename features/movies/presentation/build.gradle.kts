@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
+
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+
     alias(libs.plugins.mokkery)
 }
 
@@ -42,12 +46,20 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+
+                implementation(compose.material3)
+                implementation(compose.materialIconsExtended)
+                implementation(compose.ui)
+
                 implementation(libs.kotlin.stdlib)
 
                 implementation(libs.androidx.lifecycle.viewmodel)
 
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose.viewmodel)
+
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network.ktor3)
 
                 implementation(project(":features:movies:domain"))
             }

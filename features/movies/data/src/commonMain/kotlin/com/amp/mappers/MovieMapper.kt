@@ -1,6 +1,6 @@
 package com.amp.mappers
 
-import com.amp.models.PopularMovieResponse
+import com.amp.models.movielist.PopularMovieResponse
 import com.amp.entities.list.Movie
 
 fun PopularMovieResponse.toDomain(): List<Movie> {

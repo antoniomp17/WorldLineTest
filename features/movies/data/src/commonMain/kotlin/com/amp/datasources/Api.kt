@@ -1,8 +1,9 @@
 package com.amp.datasources
 
 import com.amp.data.BuildKonfig
-import com.amp.models.PopularMovieResponse
+import com.amp.models.movielist.PopularMovieResponse
 import com.amp.entities.details.MovieDetails
+import com.amp.models.moviedetails.MovieDetailsResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -48,21 +49,19 @@ class Api(
     suspend fun getMovieDetails(
         movieId: Int,
         language: String = "en-US"
-    ): MovieDetails {
+    ): Result<MovieDetailsResponse> {
         return try {
-            httpClient.get("$MOVIE_DETAILS_ENDPOINT/$movieId") {
-                header("Authorization", "Bearer $apiKey")
-                header("accept", "application/json")
-
-                parameter("language", language)
-            }.body<MovieDetails>()
-
+            Result.success(
+                httpClient.get("$MOVIE_DETAILS_ENDPOINT/$movieId") {
+                    header("Authorization", "Bearer $apiKey")
+                    header("accept", "application/json")
+                    parameter("language", language)
+                }.body<MovieDetailsResponse>()
+            )
         } catch (exception: Exception) {
-            throw Exception(
-                "Error retrieving movie details for $movieId: ${exception.message}",
-                exception
+            Result.failure(
+                Exception("Error retrieving movie details: ${exception.message}", exception)
             )
         }
     }
-
 }

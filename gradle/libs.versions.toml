@@ -40,6 +40,12 @@ core = "1.6.1"
 # BuildKonfig
 buildkonfig = "0.17.1"
 
+# Coil
+coil = "3.2.0"
+
+# Navigation Compose
+androidx-navigation = "2.8.0-alpha13"
+
 
 [libraries]
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -52,6 +58,8 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+
+
 
 # Kotlin Core
 kotlin-test = { module ="org.jetbrains.kotlin:kotlin-test", version.ref ="kotlin" }
@@ -67,10 +75,11 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 
-# Database
-sqdelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
-sqdelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+# Coil
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 
 # Dependency Injection
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
@@ -86,6 +95,9 @@ androidx-runner = { group = "androidx.test", name = "runner", version.ref = "run
 androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
 mokkery = { module = "dev.mokkery:mokkery-runtime", version.ref = "mokkery" }
 mokkery-coroutines = { module = "dev.mokkery:mokkery-coroutines", version.ref = "mokkery" }
+
+# Navigation
+navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

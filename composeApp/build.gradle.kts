@@ -49,6 +49,9 @@ kotlin {
 
             implementation(libs.koin.core)
 
+            implementation(libs.navigation)
+
+            implementation(project(":features:movies:presentation"))
             implementation(project(":features:movies:domain"))
             implementation(project(":features:movies:data"))
             implementation(project(":core:network"))

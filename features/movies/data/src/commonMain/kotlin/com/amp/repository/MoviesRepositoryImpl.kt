@@ -16,7 +16,10 @@ class MoviesRepositoryImpl(
         region: String?
     ): Result<List<Movie>> {
         return try {
-            val response = moviesDataSource.getPopularMovies()
+            val response = moviesDataSource.getPopularMovies(
+                page = page,
+                language = language
+            )
             if (response.isSuccess) {
                 val popularMovies = response.getOrNull()
                 if (popularMovies == null || popularMovies.results.isEmpty()) {
@@ -32,6 +35,18 @@ class MoviesRepositoryImpl(
     }
 
     override suspend fun getMovieDetails(movieId: Int, language: String): Result<MovieDetails> {
-        TODO("Not yet implemented")
+        return try {
+            val response = moviesDataSource.getMovieDetails(
+                movieId = movieId,
+                language = language
+            )
+            if (response.isSuccess) {
+                Result.success(response.getOrNull()!!.toDomain())
+            } else {
+                Result.failure(response.exceptionOrNull()!!)
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }
