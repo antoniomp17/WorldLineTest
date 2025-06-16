@@ -7,7 +7,7 @@ data class MoviesListState(
     val isLoading: Boolean = false,
     val isRefreshing: Boolean = false,
     val errorMessage: String? = null,
-    val currentPage: Int = 1,
+    val currentPage: Int = 0,
     val hasMorePages: Boolean = true,
     val isEmpty: Boolean = false
 ) {

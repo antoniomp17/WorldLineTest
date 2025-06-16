@@ -78,7 +78,7 @@ class MoviesListViewModelTest {
             mockGetPopularMoviesUseCase(page = 1)
         } returns Result.success(expectedMovies)
 
-        viewModel.handleIntent(MoviesListIntent.LoadMoviesList(page = 1))
+        viewModel.handleIntent(MoviesListIntent.LoadMovies(page = 1))
         advanceUntilIdle()
 
         val finalState = viewModel.uiState.value
@@ -118,7 +118,7 @@ class MoviesListViewModelTest {
 
         everySuspend { mockGetPopularMoviesUseCase(page = 1) } returns Result.success(refreshedMovies)
 
-        viewModel.handleIntent(MoviesListIntent.RefreshMoviesList)
+        viewModel.handleIntent(MoviesListIntent.RefreshMovies)
         advanceUntilIdle()
 
         val finalState = viewModel.uiState.value

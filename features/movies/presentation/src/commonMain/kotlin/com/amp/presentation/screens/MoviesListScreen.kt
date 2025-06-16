@@ -38,7 +38,7 @@ fun MoviesListScreen(
         state.errorMessage != null || state.movies.isEmpty() -> {
             MoviesListStates.EmptyScreen(
                 onRetry = {
-                    viewModel.handleIntent(MoviesListIntent.LoadMoviesList(page = 1, refresh = true))
+                    viewModel.handleIntent(MoviesListIntent.LoadMovies(page = 1, refresh = true))
                 }
             )
         }
@@ -50,7 +50,10 @@ fun MoviesListScreen(
                     viewModel.handleIntent(MoviesListIntent.SelectMovie(movieId))
                 },
                 onRefresh = {
-                    viewModel.handleIntent(MoviesListIntent.RefreshMoviesList)
+                    viewModel.handleIntent(MoviesListIntent.RefreshMovies)
+                },
+                onLoadMore = {
+                    viewModel.handleIntent(MoviesListIntent.LoadMoreMovies)
                 }
             )
         }
