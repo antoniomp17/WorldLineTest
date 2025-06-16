@@ -5,4 +5,5 @@ import com.amp.worldlineapp.di.KoinInitializer
 
 fun MainViewController() = ComposeUIViewController {
     KoinInitializer.initKoin()
+    App()
 }

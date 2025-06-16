@@ -7,6 +7,4 @@ import androidx.navigation.NavHostController
 actual fun PlatformBackHandler(
     navController: NavHostController,
     onBack: () -> Unit
-) {
-    //TODO
-}
+) {}
