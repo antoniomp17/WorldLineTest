@@ -29,67 +29,97 @@ fun MovieDetailsHeader(
                 .padding(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-
-            Card(
-                modifier = Modifier.size(width = 120.dp, height = 180.dp),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                AsyncImage(
-                    model = ImageUtils.buildPosterUrl(
-                        posterPath = movieDetails.posterPath,
-                        size = ImageUtils.PosterSize.W342
-                    ),
-                    contentDescription = "Poster for ${movieDetails.title}",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-            }
-
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = movieDetails.title,
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
-                )
-                
-                if (movieDetails.tagline?.isNotBlank() == true) {
-                    Text(
-                        text = movieDetails.tagline?: "",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = "⭐")
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(
-                            text = movieDetails.voteAverage.toString(),
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    }
-
-                    Text(
-                        text = movieDetails.releaseDate ?: "",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
-
-                movieDetails.runtime.toString().let { runtime ->
-                    Text(
-                        text = runtime,
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
-            }
+            MoviePoster(movieDetails)
+            MovieInfo(movieDetails)
         }
     }
+}
+
+@Composable
+private fun MoviePoster(movieDetails: MovieDetails) {
+    Card(
+        modifier = Modifier.size(width = 120.dp, height = 180.dp),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        AsyncImage(
+            model = ImageUtils.buildPosterUrl(
+                posterPath = movieDetails.posterPath,
+                size = ImageUtils.PosterSize.W342
+            ),
+            contentDescription = "Poster for ${movieDetails.title}",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+    }
+}
+
+@Composable
+private fun MovieInfo(movieDetails: MovieDetails) {
+    Box(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            MovieTitle(movieDetails.title, movieDetails.tagline)
+            MovieMetadata(movieDetails)
+        }
+    }
+}
+
+@Composable
+private fun MovieTitle(title: String, tagline: String?) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.headlineSmall,
+        fontWeight = FontWeight.Bold
+    )
+    
+    if (tagline?.isNotBlank() == true) {
+        Text(
+            text = tagline,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
+
+@Composable
+private fun MovieMetadata(movieDetails: MovieDetails) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RatingDisplay(movieDetails.voteAverage)
+        ReleaseDateDisplay(movieDetails.releaseDate)
+    }
+    
+    movieDetails.runtime.toString().let { runtime ->
+        Text(
+            text = runtime,
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+}
+
+@Composable
+private fun RatingDisplay(voteAverage: Double) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(text = "⭐")
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+            text = voteAverage.toString(),
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.SemiBold
+        )
+    }
+}
+
+@Composable
+private fun ReleaseDateDisplay(releaseDate: String?) {
+    Text(
+        text = releaseDate ?: "",
+        style = MaterialTheme.typography.bodyMedium
+    )
 }

@@ -1,4 +1,4 @@
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
@@ -9,24 +9,46 @@ plugins {
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.kotlinSerialization) apply false
-    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.detekt)
     alias(libs.plugins.kover) apply false
     alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
     alias(libs.plugins.buildkonfig) apply false
     alias(libs.plugins.mokkery) apply false
 }
 
-allprojects {
+subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
-    apply(plugin = "org.jetbrains.kotlinx.kover")
 
-    configure<DetektExtension> {
-        config.setFrom(files("detekt.yml"))
+    detekt {
+        toolVersion = "1.23.8"
+        config.setFrom("$rootDir/config/detekt/detekt.yml")
         buildUponDefaultConfig = true
+    }
+
+    tasks.withType<Detekt>().configureEach {
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+            sarif.required.set(true)
+            md.required.set(true)
+        }
     }
 }
 
-tasks.register("cleanAll") {
-    dependsOn(gradle.includedBuilds.map { it.task(":clean") })
-    dependsOn(":clean")
+val detektAll by tasks.registering(Detekt::class) {
+    parallel = true
+    buildUponDefaultConfig = true
+    setSource(files(projectDir))
+
+    include("**/*.kt")
+    include("**/*.kts")
+    exclude("**/resources/**")
+    exclude("**/build/**")
+    exclude("**/generated/**")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        html.outputLocation.set(file("build/reports/detekt/detekt.html"))
+    }
 }

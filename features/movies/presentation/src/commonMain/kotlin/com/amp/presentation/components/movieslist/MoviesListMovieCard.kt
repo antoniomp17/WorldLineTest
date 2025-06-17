@@ -30,6 +30,99 @@ import coil3.compose.AsyncImage
 import com.amp.entities.list.Movie
 import com.amp.presentation.utils.ImageUtils
 
+private const val MOVIE_POSTER_ASPECT_RATIO = 2f / 3f
+
+@Composable
+private fun MoviePoster(
+    posterPath: String,
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .aspectRatio(MOVIE_POSTER_ASPECT_RATIO)
+            .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
+    ) {
+        AsyncImage(
+            model = ImageUtils.buildPosterUrl(
+                posterPath = posterPath,
+                size = ImageUtils.PosterSize.W500
+            ),
+            contentDescription = "Poster for $title",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+    }
+}
+
+@Composable
+private fun MovieTitle(
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleSmall,
+        fontWeight = FontWeight.Bold,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis,
+        modifier = modifier.heightIn(min = 40.dp)
+    )
+}
+
+@Composable
+private fun MovieRating(
+    rating: Double,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.padding(bottom = 4.dp)
+    ) {
+        Text(
+            text = "⭐",
+            style = MaterialTheme.typography.bodySmall
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(
+            text = "$rating/10",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
+
+@Composable
+private fun MovieReleaseDate(
+    releaseDate: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = releaseDate,
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = modifier.padding(top = 2.dp)
+    )
+}
+
+@Composable
+private fun MovieInfo(
+    movie: Movie,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(12.dp)
+    ) {
+        MovieTitle(title = movie.title)
+        Spacer(modifier = Modifier.height(8.dp))
+        MovieRating(rating = movie.voteAverage)
+        MovieReleaseDate(releaseDate = movie.releaseDate)
+    }
+}
+
 @Composable
 fun MoviesListMovieCard(
     movie: Movie,
@@ -47,63 +140,11 @@ fun MoviesListMovieCard(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(2f / 3f)
-                    .clip(RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp))
-            ) {
-                AsyncImage(
-                    model = ImageUtils.buildPosterUrl(
-                        posterPath = movie.posterPath,
-                        size = ImageUtils.PosterSize.W500
-                    ),
-                    contentDescription = "Poster for ${movie.title}",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-            }
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp)
-            ) {
-                Text(
-                    text = movie.title,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.heightIn(min = 40.dp) // Ensure enough space for two lines
-                )
-
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(bottom = 4.dp)
-                ) {
-                    Text(
-                        text = "⭐",
-                        style = MaterialTheme.typography.bodySmall
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        text = "${movie.voteAverage}/10",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-
-                Text(
-                    text = movie.releaseDate,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(top = 2.dp)
-                )
-            }
+            MoviePoster(
+                posterPath = movie.posterPath ?: "",
+                title = movie.title
+            )
+            MovieInfo(movie = movie)
         }
     }
 }
